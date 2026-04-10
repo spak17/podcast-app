@@ -20,17 +20,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python -m playwright install --with-deps
 
-      - name: Install Playwright browsers
-        run: python -m playwright install chromium
-
-      - name: Run generator test
-        run: python -c "from main import get_all_articles, build_podcast_script; print('OK')"
-
-
-      - name: Upload podcast
-        uses: actions/upload-artifact@v4
-        with:
-          name: podcast
-          path: podcast.mp3
+      - name: Run script
+        run: python main.py
