@@ -1,8 +1,7 @@
 name: Daily Podcast
 
 on:
-  schedule:
-    - cron: "0 3 * * *"
+  push:
   workflow_dispatch:
 
 jobs:
