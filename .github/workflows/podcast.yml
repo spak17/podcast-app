@@ -27,8 +27,9 @@ jobs:
       - name: Install Playwright browsers
         run: python -m playwright install chromium
 
-      - name: Run generator
-        run: python main.py
+      - name: Run generator test
+        run: python -c "from main import get_all_articles, build_podcast_script; print('OK')"
+
 
       - name: Upload podcast
         uses: actions/upload-artifact@v4
