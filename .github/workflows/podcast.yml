@@ -1,8 +1,6 @@
 name: Daily Podcast
 
 on:
-  schedule:
-    - cron: "0 3 * * *"  # 5:00 Polska (UTC+2 / UTC+1)
   workflow_dispatch:
 
 jobs:
