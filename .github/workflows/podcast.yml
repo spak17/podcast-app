@@ -24,6 +24,9 @@ jobs:
           pip install -r requirements.txt
           python -m playwright install --with-deps
 
+      - name: Install Playwright browsers
+        run: python -m playwright install chromium
+
       - name: Run generator
         run: python main.py
 
