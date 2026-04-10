@@ -1,24 +1,40 @@
-# Używamy lekkiego obrazu Pythona
 FROM python:3.9-slim
 
-# Ustawiamy katalog roboczy w kontenerze
 WORKDIR /app
 
-# Kopiujemy plik z listą zależności
-COPY requirements.txt .
+# Instalujemy zależności systemowe wymagane przez Playwright
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libcups2 \
+    libdbus-1-3 \
+    libdrm2 \
+    libgbm1 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    xdg-utils \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instalujemy zależności
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Instalujemy przeglądarki dla Playwright
+# Teraz instalujemy przeglądarki Playwright
 RUN playwright install chromium
 RUN playwright install-deps
 
-# Kopiujemy resztę plików aplikacji
 COPY . .
 
-# Informujemy, że aplikacja będzie nasłuchiwać na porcie 8000
 EXPOSE 8000
 
-# Komenda do uruchomienia serwera
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
