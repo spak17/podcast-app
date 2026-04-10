@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+edge-tts
+cloudscraper
+requests
+beautifulsoup4
+playwright
+groq
